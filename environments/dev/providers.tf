@@ -1,3 +1,4 @@
+//TLA: p01
 terraform {
   required_providers {
     azurerm = {
@@ -13,7 +14,7 @@ terraform {
     resource_group_name  = "rg-tfstate"
     storage_account_name = "hftfstate"
     container_name       = "tfstate"
-    key                  = "tfdemo.dev.tfstate"
+    key                  = "tfp01.dev.tfstate"
   }
 }
 

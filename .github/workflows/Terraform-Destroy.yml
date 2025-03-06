@@ -1,0 +1,42 @@
+name: CI Pipeline to destroy Infrastructure
+
+on:
+  workflow_dispatch: 
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      environment: dev
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
+
+        - name: Setup environment variables 
+          working-directory: environments/dev
+          run: |
+            echo "setting up env variables"
+            echo "ARM_SUBSCRIPTION_ID=${{secrets.SUBSCRIPTION_ID}}" >> $GITHUB_ENV
+            echo "ARM_TENANT_ID=${{secrets.TENANTID}}" >> $GITHUB_ENV
+            echo "ARM_CLIENT_ID=${{secrets.CLIENT_ID}}" >> $GITHUB_ENV
+            echo "ARM_CLIENT_SECRET=${{secrets.CLIENT_SECRET}}" >> $GITHUB_ENV
+            echo "TF_VAR_subscription_id=${{secrets.SUBSCRIPTION_ID}}" >> $GITHUB_ENV
+            
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1
+         
+        - name: Terraform Init
+          working-directory: environments/dev
+          run: terraform init - update
+
+        - name: Terraform Validate Distruction
+          working-directory: environments/dev
+          run: terraform validate
+
+        - name: Terraform Plan Distruction 
+          working-directory: environments/dev
+          run: terraform plan -destroy -out main.dev.destroy.tfplan 
+
+        - name: Terraform Apply Distruction
+          working-directory: environments/dev
+          run: terraform apply main.dev.destroy.tfplan
+
+    

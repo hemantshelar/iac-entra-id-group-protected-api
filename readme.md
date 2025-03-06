@@ -78,3 +78,14 @@ rror: Creating user "usrdevtfdemo@NETORGFT17726763.onmicrosoft.com"
 
 Error locking state: Error acquiring the state lock: state blob is already locked
 [Break the lease](https://stackoverflow.com/questions/64690427/error-locking-state-error-acquiring-the-state-lock-state-blob-is-already-locke)
+
+
+# Setting terraform repo for the first time after cloning exsing one
+- Delete all terraform related artefacts
+  - .tfstate files
+  - .terraform dir
+- Change TLA in providers.tf
+- Change TLA in main.tf
+- Run . test.sh
+- run terraform init 
+
