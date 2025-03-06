@@ -19,9 +19,9 @@ jobs:
           run: |
             echo "setting up env variables"
             echo "ARM_SUBSCRIPTION_ID=${{secrets.SUBSCRIPTION_ID}}" >> $GITHUB_ENV
-            echo "ARM_TENANT_ID=${{secrets.ARM_TENANTID}}" >> $GITHUB_ENV
-            echo "ARM_CLIENT_ID=${{secrets.ARM_CLIENT_ID}}" >> $GITHUB_ENV
-            echo "ARM_CLIENT_SECRET=${{secrets.ARM_CLIENT_SECRET}}" >> $GITHUB_ENV
+            echo "ARM_TENANT_ID=${{secrets.TENANTID}}" >> $GITHUB_ENV
+            echo "ARM_CLIENT_ID=${{secrets.CLIENT_ID}}" >> $GITHUB_ENV
+            echo "ARM_CLIENT_SECRET=${{secrets.CLIENT_SECRET}}" >> $GITHUB_ENV
             echo "TF_VAR_subscription_id=${{secrets.SUBSCRIPTION_ID}}" >> $GITHUB_ENV
             
         - name: Setup Terraform
