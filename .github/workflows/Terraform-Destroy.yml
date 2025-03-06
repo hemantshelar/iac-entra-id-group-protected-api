@@ -25,7 +25,7 @@ jobs:
          
         - name: Terraform Init
           working-directory: environments/dev
-          run: terraform init - update
+          run: terraform init
 
         - name: Terraform Validate Distruction
           working-directory: environments/dev
