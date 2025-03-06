@@ -8,9 +8,9 @@ resource "null_resource" "test_null" {
 module "ResourceGroup" {
   source          = "../../modules/ResourceGroup"
   env             = "dev"
-  tla             = "tfdemo"
+  tla             = "p01"
   location-suffix = "aae"
-  rgname          = "rg-dev-tfdemo-aae"
+  rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
   environment     = "Development"
 }
@@ -18,9 +18,9 @@ module "ResourceGroup" {
 module "AppService" {
   source                = "../../modules/AppService"
   env                   = "dev"
-  tla                   = "tfdemo"
+  tla                   = "p01"
   location-suffix       = "aae"
-  rgname                = "rg-dev-tfdemo-aae"
+  rgname                = "rg-dev-p01-aae"
   rg-location           = "australiaeast"
   environment           = "Development"
   app_service_plan_name = "test"
@@ -34,9 +34,9 @@ module "AppService" {
 module "StorageAccount" {
   source          = "../../modules/StorageAccount"
   env             = "dev"
-  tla             = "tfdemo"
+  tla             = "p01"
   location-suffix = "aae"
-  rgname          = "rg-dev-tfdemo-aae"
+  rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
   environment     = "Development"
   depends_on      = [module.ResourceGroup]
@@ -46,9 +46,9 @@ module "StorageAccount" {
 module "UserAssignedMI" {
   source          = "../../modules/UserAssignedMI"
   env             = "dev"
-  tla             = "tfdemo"
+  tla             = "p01"
   location-suffix = "aae"
-  rgname          = "rg-dev-tfdemo-aae"
+  rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
   environment     = "Development"
   depends_on      = [module.ResourceGroup]
@@ -57,9 +57,9 @@ module "UserAssignedMI" {
 module "KeyVault" {
   source            = "../../modules/KeyVault"
   env               = "dev"
-  tla               = "tfdemo"
+  tla               = "p01"
   location-suffix   = "aae"
-  rgname            = "rg-dev-tfdemo-aae"
+  rgname            = "rg-dev-p01-aae"
   rg-location       = "australiaeast"
   environment       = "Development"
   depends_on        = [module.ResourceGroup, module.UserAssignedMI]
@@ -70,9 +70,9 @@ module "KeyVault" {
 module "EntraId" {
   source          = "../../modules/EntraId"
   env             = "dev"
-  tla             = "tfdemo"
+  tla             = "p01"
   location-suffix = "aae"
-  rgname          = "rg-dev-tfdemo-aae"
+  rgname          = "rg-dev-p01-aae"
   environment     = "Development"
   rg-location     = "australiaeast"
 }
@@ -80,9 +80,9 @@ module "EntraId" {
 module "LAW" {
   source          = "../../modules/LAW"
   env             = "dev"
-  tla             = "tfdemo"
+  tla             = "p01"
   location-suffix = "aae"
-  rgname          = "rg-dev-tfdemo-aae"
+  rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
   environment     = "Development"
   depends_on      = [module.ResourceGroup]
@@ -91,9 +91,9 @@ module "LAW" {
 module "AppInsight" {
   source          = "../../modules/AppInsight"
   env             = "dev"
-  tla             = "tfdemo"
+  tla             = "p01"
   location-suffix = "aae"
-  rgname          = "rg-dev-tfdemo-aae"
+  rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
   environment     = "Development"
   law_id          = module.LAW.log_analytics_workspace_id
