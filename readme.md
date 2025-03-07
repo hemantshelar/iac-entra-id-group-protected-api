@@ -79,6 +79,15 @@ rror: Creating user "usrdevtfdemo@NETORGFT17726763.onmicrosoft.com"
 Error locking state: Error acquiring the state lock: state blob is already locked
 [Break the lease](https://stackoverflow.com/questions/64690427/error-locking-state-error-acquiring-the-state-lock-state-blob-is-already-locke)
 
+# [Enable CI/CD for webapp](https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=userlevel%2Caspnetcore)
+ - Create deployment credentials 
+
+ `az ad sp create-for-rbac --name "myApp" --role contributor \
+                            --scopes /subscriptions/<subscription-id>/resourceGroups/<group-name>/providers/Microsoft.Web/sites/<app-name> \
+                            --json-auth`
+
+
+                        
 
 # Setting terraform repo for the first time after cloning exsing one
 - Delete all terraform related artefacts
