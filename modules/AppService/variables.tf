@@ -33,7 +33,6 @@ variable "environment" {
 
 
 
-
 variable "app_service_plan_name" {
   description = "The name of the App Service Plan"
   type        = string
@@ -44,3 +43,10 @@ variable "uami_principal_id" {
   default = ""
 }
 
+variable "instrumentation_key" {
+  type = string
+}
+
+variable "connection_string" {
+  type = string
+}

@@ -25,9 +25,13 @@ module "AppService" {
   environment           = "Development"
   app_service_plan_name = "test"
   uami_principal_id     = module.UserAssignedMI.UserAssignedMI
+  instrumentation_key   = module.AppInsight.instrumentation_key
+  connection_string     = module.AppInsight.connection_string
   depends_on = [
     module.ResourceGroup,
-    module.UserAssignedMI
+    module.UserAssignedMI,
+    module.AppInsight
+    
   ]
 }
 

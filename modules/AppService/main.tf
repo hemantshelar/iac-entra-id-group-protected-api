@@ -32,6 +32,10 @@ resource "azurerm_linux_web_app" "webapp" {
         dotnet_version = "8.0"
     }
   }
+  app_settings = {
+    APPINSIGHTS_INSTRUMENTATIONKEY = "${var.instrumentation_key}"
+    APPLICATIONINSIGHTS_CONNECTION_STRING = "${var.connection_string}"
+  }
 }
 
 
