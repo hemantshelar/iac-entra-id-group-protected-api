@@ -8,7 +8,7 @@ resource "random_password" "password" {
 
 resource "azuread_application" "entraidapp" {
   display_name     = "SPN_ENTRA_ID_GROUP_PROTECTED_API_TERRAFORM"
-  identifier_uris  = ["api://spn_entra_id_group_protected_api_terraform1"]
+  identifier_uris  = ["api://spn_entra_id_group_protected_api_terraform"]
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADandPersonalMicrosoftAccount"
 

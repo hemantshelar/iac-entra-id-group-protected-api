@@ -109,3 +109,15 @@ module "AppInsight" {
 module "AppRegistration" {
   source = "../../modules/AppRegistration"
 }
+
+
+module "GitHub" {
+  source             = "../../modules/GitHub"
+  clientid           = module.AppRegistration.clientid
+  domain             = "domain here"
+  tenantid           = "tenantid here"
+  github_token       = "token here"
+  github_owner       = "hemantshelar"
+  github_environment = "Development"
+  #depends_on         = [module.ResourceGroup, module.AppRegistration]
+}

@@ -98,3 +98,9 @@ Error locking state: Error acquiring the state lock: state blob is already locke
 - Run . test.sh
 - run terraform init 
 
+
+## Updating github environment secrets from terraform code.
+
+- Use `github` provider
+- Generate a `PAT`
+  - navigate to your GitHub settings, go to "Developer settings", click "Personal access tokens", and then "Generate new token

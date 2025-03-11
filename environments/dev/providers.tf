@@ -10,6 +10,10 @@ terraform {
       source  = "hashicorp/random"
       version = "~>3.0"
     }
+    github = {
+      source  = "integrations/github"
+      version = "~> 5.0"
+    }
   }
   backend "azurerm" {
     resource_group_name  = "rg-tfstate"
@@ -34,3 +38,10 @@ provider "azurerm" {
 provider "azuread" {
   # Configuration options
 }
+
+
+provider "github" {
+  token = "token here"
+  owner = "hemantshelar"
+}
+
