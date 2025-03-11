@@ -38,3 +38,4 @@ terraform.rc
 
 
 *.sh
+environments/dev/main.tfplan
