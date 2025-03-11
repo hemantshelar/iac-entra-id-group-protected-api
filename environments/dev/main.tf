@@ -2,7 +2,7 @@
 resource "null_resource" "test_null" {
   provisioner "local-exec" {
     command = "echo ${var.subscription_id}"
-  }  
+  }
 }
 
 module "ResourceGroup" {
@@ -31,7 +31,7 @@ module "AppService" {
     module.ResourceGroup,
     module.UserAssignedMI,
     module.AppInsight
-    
+
   ]
 }
 
@@ -66,7 +66,8 @@ module "KeyVault" {
   rgname            = "rg-dev-p01-aae"
   rg-location       = "australiaeast"
   environment       = "Development"
-  depends_on        = [module.ResourceGroup, module.UserAssignedMI]
+  postmanPassword   = module.AppRegistration.postmanPassword
+  depends_on        = [module.ResourceGroup, module.UserAssignedMI, module.AppRegistration]
   umi               = module.UserAssignedMI.UserAssignedMI
   uami_principal_id = module.UserAssignedMI.uami_principal_id
 }
@@ -102,4 +103,9 @@ module "AppInsight" {
   environment     = "Development"
   law_id          = module.LAW.log_analytics_workspace_id
   depends_on      = [module.ResourceGroup, module.LAW]
+}
+
+
+module "AppRegistration" {
+  source = "../../modules/AppRegistration"
 }

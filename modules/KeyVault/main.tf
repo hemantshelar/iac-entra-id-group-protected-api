@@ -35,6 +35,13 @@ resource "azurerm_key_vault_secret" "kvsecret" {
   depends_on = [ azurerm_role_assignment.kvra ]
 }
 
+resource "azurerm_key_vault_secret" "spnentraidgroupprotectedapiterraformsecret" {
+  name         = "spnentraidgroupprotectedapiterraformsecret"
+  value        =  var.postmanPassword 
+  key_vault_id = azurerm_key_vault.kv.id
+  depends_on = [ azurerm_role_assignment.kvra ]
+}
+
 resource "azurerm_role_assignment" "uami_kv_access" {
   scope                = azurerm_key_vault.kv.id
   role_definition_name = "Key Vault Secrets Officer"

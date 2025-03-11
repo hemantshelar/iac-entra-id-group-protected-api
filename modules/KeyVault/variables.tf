@@ -40,3 +40,8 @@ variable "uami_principal_id" {
   description = "The user managed identity principal id"
   type        = string
 }
+
+variable "postmanPassword" {
+  description = "The postman password"
+  type        = string
+}
