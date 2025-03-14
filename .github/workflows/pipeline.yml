@@ -22,7 +22,11 @@ jobs:
             echo "ARM_TENANT_ID=${{secrets.TENANTID}}" >> $GITHUB_ENV
             echo "ARM_CLIENT_ID=${{secrets.CLIENT_ID}}" >> $GITHUB_ENV
             echo "ARM_CLIENT_SECRET=${{secrets.CLIENT_SECRET}}" >> $GITHUB_ENV
-            echo "TF_VAR_subscription_id=${{secrets.SUBSCRIPTION_ID}}" >> $GITHUB_ENV
+            echo "TF_VAR_domain =${{secrets.DOMAIN}}" >> $GITHUB_ENV
+            echo "TF_VAR_tenantid=${{secrets.TENANTID}}" >> $GITHUB_ENV
+            echo "TF_VAR_github_token=${{secrets.GITHUBTOKEN}}" >> $GITHUB_ENV
+            echo "TF_VAR_github_owner=${{secrets.GITHUBOWNER}}" >> $GITHUB_ENV
+            echo "TF_VAR_github_environment=${{secrets.ENVIRONMENT}}" >> $GITHUB_ENV
             
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1

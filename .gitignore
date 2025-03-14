@@ -39,3 +39,5 @@ terraform.rc
 
 *.sh
 environments/dev/main.tfplan
+environments/dev/main.destroy.tfplan
+environments/dev/main.tfplan

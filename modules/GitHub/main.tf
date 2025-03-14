@@ -1,25 +1,16 @@
 terraform {
-required_providers {
+  required_providers {
     github = {
       source  = "integrations/github"
-      version = "~> 5.0"
-    }
+      version = "6.6.0"
+    }   
   }
 }
 
-provider "github" {
-  token = var.github_token
-  owner = var.github_owner
-}
-
-/*provider "github" {
-  token = "token here"
-  owner = "hemantshelar"
-}*/
 
 resource "github_actions_environment_secret" "clientid" {
   repository       = "entra-id-group-protected-api"
-  environment      = "Development"
+  environment      = "{var.github_environment}"
   secret_name      = "CLIENTID"
   plaintext_value  = "id" 
 }

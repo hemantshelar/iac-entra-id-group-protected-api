@@ -2,6 +2,10 @@
 //test
 terraform {
   required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "6.6.0"
+    }
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "4.21.1"
@@ -9,10 +13,6 @@ terraform {
     random = {
       source  = "hashicorp/random"
       version = "~>3.0"
-    }
-    github = {
-      source  = "integrations/github"
-      version = "~> 5.0"
     }
   }
   backend "azurerm" {
@@ -39,9 +39,10 @@ provider "azuread" {
   # Configuration options
 }
 
-
 provider "github" {
-  token = "token here"
-  owner = "hemantshelar"
+  token = var.github_token
+  owner = "#{var.github_owner}"
 }
+
+
 

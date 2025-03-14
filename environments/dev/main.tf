@@ -15,6 +15,8 @@ module "ResourceGroup" {
   environment     = "Development"
 }
 
+
+
 module "AppService" {
   source                = "../../modules/AppService"
   env                   = "dev"
@@ -105,19 +107,18 @@ module "AppInsight" {
   depends_on      = [module.ResourceGroup, module.LAW]
 }
 
-
 module "AppRegistration" {
   source = "../../modules/AppRegistration"
 }
-
-
 module "GitHub" {
-  source             = "../../modules/GitHub"
-  clientid           = module.AppRegistration.clientid
-  domain             = "domain here"
-  tenantid           = "tenantid here"
-  github_token       = "token here"
-  github_owner       = "hemantshelar"
-  github_environment = "Development"
-  #depends_on         = [module.ResourceGroup, module.AppRegistration]
+  source = "../../modules/GitHub"
+  #clientid           = module.AppRegistration.clientid
+  clientid = "test"
+  #Following variables are used to configure the GitHub Actions environment secrets
+  domain             = var.domain
+  tenantid           = var.arm_tenant_id
+  github_token       = var.github_token
+  github_owner       = var.github_owner
+  github_environment = var.environment
+  depends_on         = [module.ResourceGroup]
 }
