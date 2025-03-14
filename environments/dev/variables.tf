@@ -14,7 +14,7 @@ variable "github_environment" {
   type        = string
   description = "The environment for the resources in this example."
   validation {
-    condition     = can(contains(["dev", "test", "prod"], var.environment))
+    condition     = can(contains(["dev", "test", "prod"], var.github_environment))
     error_message = "The environment must be either dev, test, or prod."
   }
 }
