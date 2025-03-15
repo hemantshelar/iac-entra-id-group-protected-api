@@ -36,6 +36,7 @@ variable "arm_client_id" {
 }
 
 variable "arm_client_secret" {
+  #Check if its required.
   type        = string
   description = "The client secret."
   sensitive   = true

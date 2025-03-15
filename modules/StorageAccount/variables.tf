@@ -1,11 +1,4 @@
 
-
-variable "env" {
-  description = "The environment name"
-  type        = string
-  default = "value"
-}
-
 variable "tla" {
   description = "The project name"
   type        = string
@@ -28,7 +21,7 @@ variable "rg-location" {
   type        = string
   default = "value"
 }
-variable "environment" {
+variable "github_environment" {
   description = "The environment name"
   type        = string
 }

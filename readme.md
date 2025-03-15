@@ -29,6 +29,8 @@ export ARM_TENANT_ID="<azure_subscription_tenant_id>"
 export ARM_CLIENT_ID="<service_principal_appid>"
 export ARM_CLIENT_SECRET="<service_principal_password>"
 
+I have automated above process and we can export these environment variables by executing `source test.sh` script.
+
 
 In order to initialize a variable from environment variable, follow the steps. [Stack Overflow reference](https://stackoverflow.com/questions/36629367/getting-an-environment-variable-in-terraform-configuration)
 - define a variable in variables.tf file.

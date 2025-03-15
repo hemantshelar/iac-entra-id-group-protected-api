@@ -7,24 +7,23 @@ terraform {
   }
 }
 
-
 resource "github_actions_environment_secret" "clientid" {
   repository       = "entra-id-group-protected-api"
-  environment      = "{var.github_environment}"
+  environment      = var.github_environment
   secret_name      = "CLIENTID"
   plaintext_value  = "id" 
 }
 
-/*resource "github_actions_environment_secret" "domain" {
+resource "github_actions_environment_secret" "domain" {
   repository       = "entra-id-group-protected-api"
   environment      = var.github_environment
   secret_name      = "DOMAIN"
-  plaintext_value  = "${var.domain}" 
+  plaintext_value  = var.domain
 }
 
 resource "github_actions_environment_secret" "tenantid" {
   repository       = "entra-id-group-protected-api"
   environment      = var.github_environment
   secret_name      = "TENANTID"
-  plaintext_value  = "${var.tenantid}" 
-}*/
+  plaintext_value  = var.tenantid
+}

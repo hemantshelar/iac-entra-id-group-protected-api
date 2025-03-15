@@ -7,24 +7,22 @@ resource "null_resource" "test_null" {
 
 module "ResourceGroup" {
   source          = "../../modules/ResourceGroup"
-  env             = "dev"
+  github_environment = var.github_environment
   tla             = "p01"
   location-suffix = "aae"
   rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
-  environment     = "Development"
 }
 
 
-
+/*
 module "AppService" {
   source                = "../../modules/AppService"
-  env                   = "dev"
+  github_environment = var.github_environment
   tla                   = "p01"
   location-suffix       = "aae"
   rgname                = "rg-dev-p01-aae"
   rg-location           = "australiaeast"
-  environment           = "Development"
   app_service_plan_name = "test"
   uami_principal_id     = module.UserAssignedMI.UserAssignedMI
   instrumentation_key   = module.AppInsight.instrumentation_key
@@ -39,35 +37,32 @@ module "AppService" {
 
 module "StorageAccount" {
   source          = "../../modules/StorageAccount"
-  env             = "dev"
+  github_environment = var.github_environment
   tla             = "p01"
   location-suffix = "aae"
   rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
-  environment     = "Development"
   depends_on      = [module.ResourceGroup]
 }
 
 
 module "UserAssignedMI" {
   source          = "../../modules/UserAssignedMI"
-  env             = "dev"
+  github_environment = var.github_environment
   tla             = "p01"
   location-suffix = "aae"
   rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
-  environment     = "Development"
   depends_on      = [module.ResourceGroup]
 }
 
 module "KeyVault" {
   source            = "../../modules/KeyVault"
-  env               = "dev"
+  github_environment = var.github_environment
   tla               = "p01"
   location-suffix   = "aae"
   rgname            = "rg-dev-p01-aae"
   rg-location       = "australiaeast"
-  environment       = "Development"
   postmanPassword   = module.AppRegistration.postmanPassword
   depends_on        = [module.ResourceGroup, module.UserAssignedMI, module.AppRegistration]
   umi               = module.UserAssignedMI.UserAssignedMI
@@ -86,30 +81,28 @@ module "EntraId" {
 
 module "LAW" {
   source          = "../../modules/LAW"
-  env             = "dev"
+  github_environment = var.github_environment
   tla             = "p01"
   location-suffix = "aae"
   rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
-  environment     = "Development"
   depends_on      = [module.ResourceGroup]
 }
 
 module "AppInsight" {
   source          = "../../modules/AppInsight"
-  env             = "dev"
+  github_environment = var.github_environment
   tla             = "p01"
   location-suffix = "aae"
   rgname          = "rg-dev-p01-aae"
   rg-location     = "australiaeast"
-  environment     = "Development"
   law_id          = module.LAW.log_analytics_workspace_id
   depends_on      = [module.ResourceGroup, module.LAW]
 }
 
 module "AppRegistration" {
   source = "../../modules/AppRegistration"
-}
+}*/
 module "GitHub" {
   source = "../../modules/GitHub"
   #clientid           = module.AppRegistration.clientid
@@ -119,6 +112,6 @@ module "GitHub" {
   tenantid           = var.arm_tenant_id
   github_token       = var.github_token
   github_owner       = var.github_owner
-  github_environment = var.environment
+  github_environment = var.github_environment
   depends_on         = [module.ResourceGroup]
 }

@@ -1,5 +1,5 @@
 resource "azurerm_application_insights" "appinsight" {
-  name                = "appinsight-${var.env}-${var.tla}-${var.location-suffix}"
+  name                = "appinsight-${var.github_environment}-${var.tla}-${var.location-suffix}"
   location            = "${var.rg-location}"
   resource_group_name = "${var.rgname}"
   application_type    = "web"

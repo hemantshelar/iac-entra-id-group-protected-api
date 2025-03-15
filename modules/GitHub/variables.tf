@@ -11,7 +11,6 @@ variable "github_token" {
 variable "github_owner" {
   description = "The GitHub owner"
   type        = string
-  default = "hemantshelar"
 }
 
 variable "clientid" {

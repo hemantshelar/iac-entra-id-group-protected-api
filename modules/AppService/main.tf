@@ -1,16 +1,14 @@
 //asp-dev-tfdemo-aae
 resource "azurerm_service_plan" "spdefault" {
-  name                = "asp-${var.env}-${var.tla}-${var.location-suffix}"
+  name                = "asp-${var.github_environment}-${var.tla}-${var.location-suffix}"
   resource_group_name = "${var.rgname}"
   location            = "${var.rg-location}"
   os_type             = "Linux"
   sku_name            = "F1"
 }
 
-//webapp-dev-tfdemo-aae
-
 resource "azurerm_linux_web_app" "webapp" {
-  name                = "web-${var.env}-${var.tla}-${var.location-suffix}"
+  name                = "web-${var.github_environment}-${var.tla}-${var.location-suffix}"
   resource_group_name = "${var.rgname}"
   location            = "${var.rg-location}" 
   service_plan_id     = azurerm_service_plan.spdefault.id
@@ -37,7 +35,6 @@ resource "azurerm_linux_web_app" "webapp" {
     APPLICATIONINSIGHTS_CONNECTION_STRING = "${var.connection_string}"
   }
 }
-
 
 resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id             = azurerm_linux_web_app.webapp.id
