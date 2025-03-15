@@ -57,3 +57,22 @@ variable "github_owner" {
   type        = string
   description = "The GitHub owner."
 }
+
+variable "resource_group_prefix" {
+  type        = string
+  description = "The prefix for the resource group."
+}
+variable "tla" {
+  type        = string
+  description = "The three-letter acronym for the environment."
+}
+variable "location_suffix" {
+  type        = string
+  description = "The location suffix."
+  default     = "aae"
+}
+
+variable "rg_location" {
+  type        = string
+  description = "The resource group location."
+}

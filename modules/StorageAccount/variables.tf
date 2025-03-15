@@ -2,24 +2,20 @@
 variable "tla" {
   description = "The project name"
   type        = string
-  default = "value"
 }
 
 variable "location-suffix" {
   description = "The location suffix"
   type        = string
-  default = "value"
 }
 
 variable "rgname" {
   description = "The resource group name"
   type        = string
-  default = "value"
 }
 variable "rg-location" {
   description = "The resource group location"
   type        = string
-  default = "value"
 }
 variable "github_environment" {
   description = "The environment name"

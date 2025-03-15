@@ -2,8 +2,8 @@
 # Usage: rg-dev-tfdemo-aae
 
 resource "azurerm_resource_group" "rg" {
-  name =   "rg-${var.github_environment}-${var.tla}-${var.location-suffix}"
-  location = "${var.rg-location}"
+  name =   join("-", [var.resource_group_prefix, var.github_environment,var.tla,var.location_suffix])
+  location = "${var.rg_location}"
   tags = {
         environment = "${var.github_environment}"
     }
