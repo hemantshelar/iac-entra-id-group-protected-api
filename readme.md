@@ -29,6 +29,8 @@ export ARM_TENANT_ID="<azure_subscription_tenant_id>"
 export ARM_CLIENT_ID="<service_principal_appid>"
 export ARM_CLIENT_SECRET="<service_principal_password>"
 
+I have automated above process and we can export these environment variables by executing `source test.sh` script.
+
 
 In order to initialize a variable from environment variable, follow the steps. [Stack Overflow reference](https://stackoverflow.com/questions/36629367/getting-an-environment-variable-in-terraform-configuration)
 - define a variable in variables.tf file.
@@ -79,6 +81,15 @@ rror: Creating user "usrdevtfdemo@NETORGFT17726763.onmicrosoft.com"
 Error locking state: Error acquiring the state lock: state blob is already locked
 [Break the lease](https://stackoverflow.com/questions/64690427/error-locking-state-error-acquiring-the-state-lock-state-blob-is-already-locke)
 
+# [Enable CI/CD for webapp](https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=userlevel%2Caspnetcore)
+ - Create deployment credentials 
+
+ `az ad sp create-for-rbac --name "myApp" --role contributor \
+                            --scopes /subscriptions/<subscription-id>/resourceGroups/<group-name>/providers/Microsoft.Web/sites/<app-name> \
+                            --json-auth`
+
+
+                        
 
 # Setting terraform repo for the first time after cloning exsing one
 - Delete all terraform related artefacts
@@ -89,3 +100,9 @@ Error locking state: Error acquiring the state lock: state blob is already locke
 - Run . test.sh
 - run terraform init 
 
+
+## Updating github environment secrets from terraform code.
+
+- Use `github` provider
+- Generate a `PAT`
+  - navigate to your GitHub settings, go to "Developer settings", click "Personal access tokens", and then "Generate new token

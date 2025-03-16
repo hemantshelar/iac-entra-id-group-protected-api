@@ -2,6 +2,10 @@
 //test
 terraform {
   required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "6.6.0"
+    }
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "4.21.1"
@@ -20,7 +24,7 @@ terraform {
 }
 
 provider "azurerm" {
-  subscription_id = "${var.subscription_id}"
+  subscription_id = var.subscription_id
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
@@ -34,3 +38,11 @@ provider "azurerm" {
 provider "azuread" {
   # Configuration options
 }
+
+provider "github" {
+  token = var.github_token
+  owner = var.github_owner
+}
+
+
+

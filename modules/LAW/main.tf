@@ -1,6 +1,6 @@
 
 resource "azurerm_log_analytics_workspace" "law" {
-  name                = "law-${var.env}-${var.tla}-${var.location-suffix}"
+  name                = "law-${var.github_environment}-${var.tla}-${var.location-suffix}"
   location            = "${var.rg-location}"
   resource_group_name = "${var.rgname}"
   sku                 = "PerGB2018"

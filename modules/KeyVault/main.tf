@@ -2,7 +2,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "kv" {
-  name                        = "kv-${var.env}-${var.tla}-${var.location-suffix}"
+  name                        = "kv-${var.github_environment}-${var.tla}-${var.location-suffix}"
   location                    = "${var.rg-location}" 
   resource_group_name         = "${var.rgname}"
   enabled_for_disk_encryption = true
@@ -31,6 +31,13 @@ resource "azurerm_role_assignment" "kvra" {
 resource "azurerm_key_vault_secret" "kvsecret" {
   name         = "example-secret"
   value        = "example-value"
+  key_vault_id = azurerm_key_vault.kv.id
+  depends_on = [ azurerm_role_assignment.kvra ]
+}
+
+resource "azurerm_key_vault_secret" "spnentraidgroupprotectedapiterraformsecret" {
+  name         = "spnentraidgroupprotectedapiterraformsecret"
+  value        =  var.postmanPassword 
   key_vault_id = azurerm_key_vault.kv.id
   depends_on = [ azurerm_role_assignment.kvra ]
 }

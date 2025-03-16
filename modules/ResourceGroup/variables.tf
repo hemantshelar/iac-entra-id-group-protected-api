@@ -1,33 +1,21 @@
-variable "env" {
-  description = "The environment name"
+variable "resource_group_prefix" {
+  description = "The prefix for the resource group"
   type        = string
-  default = "value"
 }
-
+variable "github_environment" {
+    type = string
+    description = "Environment name."
+}
 variable "tla" {
   description = "The project name"
   type        = string
-  default = "value"
 }
-
-variable "location-suffix" {
+variable "location_suffix" {
   description = "The location suffix"
   type        = string
-  default = "value"
 }
 
-variable "rgname" {
-  description = "The resource group name"
-  type        = string
-  default = "value"
-}
-variable "rg-location" {
+variable "rg_location" {
   description = "The resource group location"
   type        = string
-  default = "value"
-}
-variable "environment" {
-    type = string
-    description = "Environment name."
-    default = "Development"
 }

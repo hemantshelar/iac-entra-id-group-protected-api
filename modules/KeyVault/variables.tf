@@ -1,32 +1,22 @@
-variable "env" {
-  description = "The environment name"
-  type        = string
-  default = "value"
-}
-
 variable "tla" {
   description = "The project name"
   type        = string
-  default = "value"
 }
 
 variable "location-suffix" {
   description = "The location suffix"
   type        = string
-  default = "value"
 }
 
 variable "rgname" {
   description = "The resource group name"
   type        = string
-  default = "value"
 }
 variable "rg-location" {
   description = "The resource group location"
   type        = string
-  default = "value"
 }
-variable "environment" {
+variable "github_environment" {
   description = "The environment name"
   type        = string
 }
@@ -38,5 +28,10 @@ variable "umi" {
 
 variable "uami_principal_id" {
   description = "The user managed identity principal id"
+  type        = string
+}
+
+variable "postmanPassword" {
+  description = "The postman password"
   type        = string
 }
