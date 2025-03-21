@@ -1,15 +1,15 @@
 
 
 resource "azuread_group" "envcontributors" {
-  display_name = "GRP-${var.env}-${var.tla}-contributors"
+  display_name =  join("-",["GRP",var.github_environment,var.tla,"contributors"])
   mail_enabled = false
   security_enabled = true
 }
 
 resource "azuread_user" "envuser" {
-  user_principal_name = "usr${var.env}${var.tla}@NETORGFT17726763.onmicrosoft.com"
-  display_name        = "usr${var.env}${var.tla}"
-  mail_nickname       = "usr${var.env}${var.tla}"
+  user_principal_name = "usr${var.github_environment}${var.tla}@NETORGFT17726763.onmicrosoft.com"
+  display_name        = "usr${var.github_environment}${var.tla}"
+  mail_nickname       = "usr${var.github_environment}${var.tla}"
   password            = "P@ssw0rd1234!"  # Ensure you follow your organization's password policy
 }
 
@@ -20,21 +20,21 @@ resource "azuread_group_member" "envusermember" {
 
 #Create admin user group
 resource "azuread_group" "envadmins" {
-  display_name = "GRP-${var.env}-${var.tla}-admins"
+  display_name = "GRP-${var.github_environment}-${var.tla}-admins"
   mail_enabled = false
   security_enabled = true
 }
 #Create admin users
 resource "azuread_user" "adminuser1" {
-  user_principal_name = "adminuser1${var.env}${var.tla}@NETORGFT17726763.onmicrosoft.com"
-  display_name        = "adminuser1${var.env}${var.tla}"
-  mail_nickname       = "adminuser1${var.env}${var.tla}"
+  user_principal_name = "adminuser1${var.github_environment}${var.tla}@NETORGFT17726763.onmicrosoft.com"
+  display_name        = "adminuser1${var.github_environment}${var.tla}"
+  mail_nickname       = "adminuser1${var.github_environment}${var.tla}"
   password            = "P@ssw0rd1234!"  # Ensure you follow your organization's password policy
 }
 resource "azuread_user" "adminuser2" {
-  user_principal_name = "adminuser2${var.env}${var.tla}@NETORGFT17726763.onmicrosoft.com"
-  display_name        = "adminuser2${var.env}${var.tla}"
-  mail_nickname       = "adminuser2${var.env}${var.tla}"
+  user_principal_name = "adminuser2${var.github_environment}${var.tla}@NETORGFT17726763.onmicrosoft.com"
+  display_name        = "adminuser2${var.github_environment}${var.tla}"
+  mail_nickname       = "adminuser2${var.github_environment}${var.tla}"
   password            = "P@ssw0rd1234!"  # Ensure you follow your organization's password policy
 }
 #add user to group
@@ -49,22 +49,22 @@ resource "azuread_group_member" "adminuser2member" {
 
 #Create non-admin group
 resource "azuread_group" "envnonadmins" {
-  display_name = "GRP-${var.env}-${var.tla}-nonadmins"
+  display_name = "GRP-${var.github_environment}-${var.tla}-nonadmins"
   mail_enabled = false
   security_enabled = true
 }
 
 #Create non-admin users
 resource "azuread_user" "nonadminuser1" {
-  user_principal_name = "nonadminuser1${var.env}${var.tla}@NETORGFT17726763.onmicrosoft.com"
-  display_name        = "nonadminuser1${var.env}${var.tla}"
-  mail_nickname       = "nonadminuser1${var.env}${var.tla}"
+  user_principal_name = "nonadminuser1${var.github_environment}${var.tla}@NETORGFT17726763.onmicrosoft.com"
+  display_name        = "nonadminuser1${var.github_environment}${var.tla}"
+  mail_nickname       = "nonadminuser1${var.github_environment}${var.tla}"
   password            = "P@ssw0rd1234!"  # Ensure you follow your organization's password policy
 }
 resource "azuread_user" "nonadminuser2" {
-  user_principal_name = "nonadminuser2${var.env}${var.tla}@NETORGFT17726763.onmicrosoft.com"
-  display_name        = "nonadminuser2${var.env}${var.tla}"
-  mail_nickname       = "nonadminuser2${var.env}${var.tla}"
+  user_principal_name = "nonadminuser2${var.github_environment}${var.tla}@NETORGFT17726763.onmicrosoft.com"
+  display_name        = "nonadminuser2${var.github_environment}${var.tla}"
+  mail_nickname       = "nonadminuser2${var.github_environment}${var.tla}"
   password            = "P@ssw0rd1234!"  # Ensure you follow your organization's password policy
 }
 

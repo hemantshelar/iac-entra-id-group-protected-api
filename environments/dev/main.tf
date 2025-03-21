@@ -6,11 +6,11 @@ resource "null_resource" "test_null" {
 }
 
 module "ResourceGroup" {
-  source             = "../../modules/ResourceGroup"
+  source                = "../../modules/ResourceGroup"
   resource_group_prefix = var.resource_group_prefix
-  github_environment = var.github_environment
-  tla                = var.tla
-  location_suffix    = var.location_suffix
+  github_environment    = var.github_environment
+  tla                   = var.tla
+  location_suffix       = var.location_suffix
   #rgname          = "rg-dev-p01-aae"
   rg_location = var.rg_location
 
@@ -18,6 +18,22 @@ module "ResourceGroup" {
 
 module "StorageAccount" {
   source             = "../../modules/StorageAccount"
+  github_environment = var.github_environment
+  tla                = var.tla
+  location-suffix    = var.location_suffix
+  rgname             = join("-", [var.resource_group_prefix, var.github_environment, var.tla, var.location_suffix])
+  rg-location        = var.resource_group_location
+  depends_on         = [module.ResourceGroup]
+}
+
+module "EntraId" {
+  source             = "../../modules/EntraId"
+  github_environment = var.github_environment
+  tla                = var.tla
+}
+
+module "UserAssignedMI" {
+  source             = "../../modules/UserAssignedMI"
   github_environment = var.github_environment
   tla                = var.tla
   location-suffix    = var.location_suffix
@@ -47,15 +63,6 @@ module "AppService" {
   ]
 }
 
-module "UserAssignedMI" {
-  source          = "../../modules/UserAssignedMI"
-  github_environment = var.github_environment
-  tla             = "p01"
-  location-suffix = "aae"
-  rgname          = "rg-dev-p01-aae"
-  rg-location     = "australiaeast"
-  depends_on      = [module.ResourceGroup]
-}
 
 module "KeyVault" {
   source            = "../../modules/KeyVault"
@@ -70,15 +77,7 @@ module "KeyVault" {
   uami_principal_id = module.UserAssignedMI.uami_principal_id
 }
 
-module "EntraId" {
-  source          = "../../modules/EntraId"
-  env             = "dev"
-  tla             = "p01"
-  location-suffix = "aae"
-  rgname          = "rg-dev-p01-aae"
-  environment     = "Development"
-  rg-location     = "australiaeast"
-}
+
 
 module "LAW" {
   source          = "../../modules/LAW"

@@ -1,3 +1,8 @@
+variable "github_environment" {
+  description = "The environment name"
+  type        = string
+}
+
 variable "tla" {
   description = "The project name"
   type        = string
@@ -16,10 +21,7 @@ variable "rg-location" {
   description = "The resource group location"
   type        = string
 }
-variable "github_environment" {
-  description = "The environment name"
-  type        = string
-}
+
 
 variable "umi" {
   description = "The user managed identity"
