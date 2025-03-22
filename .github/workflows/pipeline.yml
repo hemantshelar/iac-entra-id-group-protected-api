@@ -51,7 +51,7 @@ jobs:
             TF_VAR_location_suffix: ${{secrets.LOCATIONSUFFIX}}
             TF_VAR_rg_location: ${{secrets.RGLOCATION}}
             TF_VAR_github_environment: ${{secrets.ENVIRONMENT}}
-            TF_VAR_ENTRA_ID_GROUP_PROTECTED_API_TERRAFORM: "ENTRA_ID_GROUP_PROTECTED_API_TERRAFORM"
+            TF_VAR_appname: "ENTRA_ID_GROUP_PROTECTED_API_TERRAFORM"
 
 
         - name: Terraform Apply
