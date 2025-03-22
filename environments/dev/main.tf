@@ -61,11 +61,10 @@ module "AppRegistration" {
 }
 module "GitHub" {
   source = "../../modules/GitHub"
-  #clientid           = module.AppRegistration.clientid
-  clientid = "test"
+  domain             = module.AppRegistration.domain    #var.domain
+  tenantid           = module.AppRegistration.tenantid  #var.arm_tenant_id
+  clientid           = module.AppRegistration.clientid
   #Following variables are used to configure the GitHub Actions environment secrets
-  domain             = var.domain
-  tenantid           = var.arm_tenant_id
   github_token       = var.github_token
   github_owner       = var.github_owner
   github_environment = var.github_environment
