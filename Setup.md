@@ -12,3 +12,11 @@
 - Execute `terraform apply main.destroy.tfplan`
 
 **Github ACtions setup**
+
+
+
+**Adding new variables**
+ - Add new variables to module.variables.tf file
+ - Refer them in respective moduel.main.tf file
+ - Update dev.variables.tf file
+ - Populate required variables in dev.main.module invocation statement.

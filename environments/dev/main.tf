@@ -11,9 +11,7 @@ module "ResourceGroup" {
   github_environment    = var.github_environment
   tla                   = var.tla
   location_suffix       = var.location_suffix
-  #rgname          = "rg-dev-p01-aae"
-  rg_location = var.rg_location
-
+  rg_location           = var.rg_location
 }
 
 module "StorageAccount" {
@@ -31,78 +29,36 @@ module "EntraId" {
   github_environment = var.github_environment
   tla                = var.tla
 }
-
 module "UserAssignedMI" {
   source             = "../../modules/UserAssignedMI"
   github_environment = var.github_environment
   tla                = var.tla
   location-suffix    = var.location_suffix
-  rgname             = join("-", [var.resource_group_prefix, var.github_environment, var.tla, var.location_suffix])
+  rgname             = join("-", [var.resource_group_prefix, upper(var.github_environment), upper(var.tla), var.location_suffix])
   rg-location        = var.resource_group_location
   depends_on         = [module.ResourceGroup]
 }
-
-
-/*
-
-module "AppService" {
-  source                = "../../modules/AppService"
-  github_environment = var.github_environment
-  tla                   = var.tla
-  location-suffix       = var.location-suffix
-  rgname                = join("-", [var.resource-group-prefix, var.github_environment,var.tla, var.location-suffix])
-  rg-location           = var.resource_group_location
-  app_service_plan_name = "test"
-  uami_principal_id     = module.UserAssignedMI.UserAssignedMI
-  instrumentation_key   = module.AppInsight.instrumentation_key
-  connection_string     = module.AppInsight.connection_string
-  depends_on = [
-    module.ResourceGroup,
-    module.UserAssignedMI,
-    module.AppInsight
-  ]
-}
-
-
 module "KeyVault" {
-  source            = "../../modules/KeyVault"
+  source             = "../../modules/KeyVault"
   github_environment = var.github_environment
-  tla               = "p01"
-  location-suffix   = "aae"
-  rgname            = "rg-dev-p01-aae"
-  rg-location       = "australiaeast"
-  postmanPassword   = module.AppRegistration.postmanPassword
-  depends_on        = [module.ResourceGroup, module.UserAssignedMI, module.AppRegistration]
-  umi               = module.UserAssignedMI.UserAssignedMI
-  uami_principal_id = module.UserAssignedMI.uami_principal_id
-}
-
-
-
-module "LAW" {
-  source          = "../../modules/LAW"
-  github_environment = var.github_environment
-  tla             = "p01"
-  location-suffix = "aae"
-  rgname          = "rg-dev-p01-aae"
-  rg-location     = "australiaeast"
-  depends_on      = [module.ResourceGroup]
-}
-
-module "AppInsight" {
-  source          = "../../modules/AppInsight"
-  github_environment = var.github_environment
-  tla             = "p01"
-  location-suffix = "aae"
-  rgname          = "rg-dev-p01-aae"
-  rg-location     = "australiaeast"
-  law_id          = module.LAW.log_analytics_workspace_id
-  depends_on      = [module.ResourceGroup, module.LAW]
+  tla                = var.tla
+  location-suffix    = var.location_suffix
+  rgname             = join("-", [var.resource_group_prefix, upper(var.github_environment), upper(var.tla), var.location_suffix])
+  rg-location        = var.resource_group_location
+  postmanPassword    = module.AppRegistration.postmanPassword
+  umi                = module.UserAssignedMI.UserAssignedMI
+  uami_principal_id  = module.UserAssignedMI.uami_principal_id
+  depends_on         = [module.ResourceGroup, module.UserAssignedMI, module.AppRegistration]
 }
 
 module "AppRegistration" {
-  source = "../../modules/AppRegistration"
-}*/
+  source             = "../../modules/AppRegistration"
+  appname            = var.appname
+  tla                = var.tla
+  github_environment = var.github_environment
+  sign_in_audience   = "AzureADandPersonalMicrosoftAccount"
+  depends_on         = [module.ResourceGroup]
+}
 module "GitHub" {
   source = "../../modules/GitHub"
   #clientid           = module.AppRegistration.clientid
@@ -114,4 +70,43 @@ module "GitHub" {
   github_owner       = var.github_owner
   github_environment = var.github_environment
   depends_on         = [module.ResourceGroup]
+}
+
+module "LAW" {
+  source             = "../../modules/LAW"
+  github_environment = var.github_environment
+  tla                = var.tla
+  location-suffix    = var.location_suffix
+  rgname             = join("-", [var.resource_group_prefix, var.github_environment, var.tla, var.location_suffix])
+  rg-location        = var.resource_group_location
+  depends_on         = [module.ResourceGroup]
+}
+
+module "AppInsight" {
+  source             = "../../modules/AppInsight"
+  github_environment = var.github_environment
+  tla                = var.tla
+  location-suffix    = var.location_suffix
+  rgname             = join("-", [var.resource_group_prefix, var.github_environment, var.tla, var.location_suffix])
+  rg-location        = var.resource_group_location
+  law_id             = module.LAW.log_analytics_workspace_id
+  depends_on         = [module.ResourceGroup, module.LAW]
+}
+
+module "AppService" {
+  source                = "../../modules/AppService"
+  github_environment    = var.github_environment
+  tla                   = var.tla
+  location-suffix       = var.location_suffix
+  rgname                = join("-", [var.resource_group_prefix, var.github_environment, var.tla, var.location_suffix])
+  rg-location           = var.resource_group_location
+  app_service_plan_name = join("_", ["asp", var.github_environment, var.tla, var.location_suffix])
+  uami_principal_id     = module.UserAssignedMI.UserAssignedMI
+  instrumentation_key   = module.AppInsight.instrumentation_key
+  connection_string     = module.AppInsight.connection_string
+  depends_on = [
+    module.ResourceGroup,
+    module.UserAssignedMI,
+    module.AppInsight
+  ]
 }

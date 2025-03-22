@@ -6,11 +6,14 @@ resource "random_password" "password" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
+resource "random_uuid" "guidGenerator" {
+}
+
 resource "azuread_application" "entraidapp" {
-  display_name     = "SPN_ENTRA_ID_GROUP_PROTECTED_API_TERRAFORM"
-  identifier_uris  = ["api://spn_entra_id_group_protected_api_terraform"]
+  display_name     = join("_",["SPN",upper(var.github_environment),upper(var.tla),upper(var.appname)]) # "SPN_ENTRA_ID_GROUP_PROTECTED_API_TERRAFORM"
+  identifier_uris  = [join("_",["api://","SPN",var.github_environment,var.tla,var.appname])]#["api://spn_entra_id_group_protected_api_terraform"]
   owners           = [data.azuread_client_config.current.object_id]
-  sign_in_audience = "AzureADandPersonalMicrosoftAccount"
+  sign_in_audience = var.sign_in_audience
 
   api {
     mapped_claims_enabled          = true
@@ -30,6 +33,16 @@ resource "azuread_application" "entraidapp" {
       user_consent_description   = "Allow the application to access example on your behalf."
       user_consent_display_name  = "Access example"
       value                      = "user_impersonation"
+    }
+    oauth2_permission_scope {
+      admin_consent_description  = "Allow the application to access example on behalf of the signed-in user."
+      admin_consent_display_name = "Access example"
+      enabled                    = true
+      id                         = random_uuid.guidGenerator.result
+      type                       = "User"
+      user_consent_description   = "Allow the application to access example on your behalf."
+      user_consent_display_name  = "Access example"
+      value                      = "access_as_user"
     }
 
     oauth2_permission_scope {
