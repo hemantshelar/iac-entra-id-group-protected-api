@@ -11,7 +11,7 @@ resource "github_actions_environment_secret" "clientid" {
   repository       = "entra-id-group-protected-api"
   environment      = var.github_environment
   secret_name      = "CLIENTID"
-  plaintext_value  = "id" 
+  plaintext_value  = var.clientid
 }
 
 resource "github_actions_environment_secret" "domain" {
