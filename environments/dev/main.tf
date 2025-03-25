@@ -109,3 +109,24 @@ module "AppService" {
     module.AppInsight
   ]
 }
+
+module "webappangular" {
+  source             = "../../modules/WebAppAngular"
+  github_environment    = var.github_environment
+  tla                   = var.tla
+  location-suffix       = var.location_suffix
+  rgname                = join("-", [var.resource_group_prefix, var.github_environment, var.tla, var.location_suffix])
+  rg-location           = var.resource_group_location
+  app_service_plan_name = join("_", ["asp", var.github_environment, var.tla, var.location_suffix])
+  uami_principal_id     = module.UserAssignedMI.UserAssignedMI
+  instrumentation_key   = module.AppInsight.instrumentation_key
+  connection_string     = module.AppInsight.connection_string
+  service_plan_id       = module.AppService.service_plan_id
+  depends_on = [
+    module.ResourceGroup,
+    module.UserAssignedMI,
+    module.AppInsight,
+    module.AppService
+  ]
+  
+}
