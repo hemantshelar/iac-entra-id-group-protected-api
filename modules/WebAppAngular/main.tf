@@ -28,3 +28,12 @@ resource "azurerm_linux_web_app" "webappangular" {
     APPLICATIONINSIGHTS_CONNECTION_STRING = "${var.connection_string}"
   }
 }
+
+resource "azurerm_app_service_source_control" "sourcecontrol" {
+  app_id             = azurerm_linux_web_app.webappangular.id
+  repo_url           = "https://github.com/hemantshelar/entra-id-group-protected-spa-client"
+  branch             = "main"
+  use_manual_integration = true
+  use_mercurial      = false
+  depends_on = [ azurerm_linux_web_app.webappangular ]
+}
